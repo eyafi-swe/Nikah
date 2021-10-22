@@ -1,0 +1,45 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+{% block css %}
+body,
+html {
+    
+    line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url( "{% static 'images/1.jpg' %}");
+    
+    min-height: 95vh;
+}
+    
+    
+{% endblock css %}
+    
+
+{% block body %}
+   
+<header class="bgimg w3-display-container" >
+    <div class="w3-display-left w3-text-white" style="padding:48px";>
+        <span class="w3-xxxlarge w3-mobile">খুঁজে নিন পছন্দের সঙ্গীকে</span><br>
+        <span class="w3-padding-64 w3-hide-small">তোমরা বিয়ে কর নারীদের মধ্যে, যাকে তোমাদের ভাল লাগে<br />-সূরা
+            নিসা, আয়াত
+            ৩</span>
+        <br />
+        <a href="accounts/register">
+            <button
+                class="w3-btn w3-white w3-padding-large w3-large w3-margin-top w3-text-theme w3-block w3-half">
+                প্রোফাইল তৈরি করুন এখনই
+            </button>
+        </a>
+
+    </div>
+
+</header>
+
+{% endblock body %}
+    

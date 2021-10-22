@@ -1,0 +1,42 @@
+{% extends 'base.htm' %}
+
+
+
+{% block css %}
+    .body{
+        margin-top:100px;
+    }
+    .unread, .old{
+        width:50%;
+        margin:auto;
+        background-color:#e6e6e6;
+        padding:50px;
+        box-shadow:20px 20px 10px grey;
+    }
+    .old{
+        margin-bottom:100px;
+    }
+{% endblock css %}
+    
+
+{% block body %}{% load notifications_tags %}
+
+<div class="w3-container body">
+{% notifications_unread as unread_count %}
+        <div class="unread">
+            {% if unread_count %}
+         <h4><b> {% live_notify_badge %} </b> জন নতুন আগ্রহী </h4>
+        {% live_notify_list %}
+        {{ live_notify_list|safe }}
+        {% endif %} 
+        </div><hr>
+        <div class="old">
+            <h4>সকল নোটিফিকেশন</h4>
+        {% for i in user.notifications.unread %}
+        {{ i|safe }}
+        <br>
+        {% endfor %}
+        </div>
+
+</div>
+{% endblock body %}

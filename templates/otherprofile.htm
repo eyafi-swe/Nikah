@@ -1,0 +1,136 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+
+{% block title %}
+{{user.username}}
+{% endblock title %}
+
+
+{% block css %}
+.galleryImages{
+    display: flex;
+    
+}
+.images{
+    padding: 10px 10px;
+}
+.images img{
+    height: 300px;
+    width:400px;
+}
+
+@media only screen and (max-width: 600px){
+    .galleryImages{
+        flex-direction:column;
+    }
+}
+{% endblock css %}
+
+
+{% block body %}
+
+
+
+<section class="w3-light-grey">
+    <div class="w3-auto">
+        <div class="w3-row w3-auto w3-border w3-padding-64 w3-white w3-margin w3-card">
+            <div class="w3-col l2 w3-content w3-margin w3-border">
+                <img src="{{user.userprofile.profilePicture.url}}" class="w3-image" >
+            </div>
+            <div class=" w3-col l7 w3-margin-left w3-padding-16 w3-leftbar">
+                <div class="w3-margin">
+                    <h3 class="w3-xxlarge"><b>{{user.first_name}} {{user.last_name}}</b></h3>
+                    <h4 class="w3-large">{{user.userprofile.bio}}</h4>
+
+                    <table class="w3-large w3-padding-64 w3-margin w3-bordered w3-table w3-half">
+                        <tr>
+                            <td><b>জাতীয়তা</b></td>
+                            <td>{{user.userprofile.nationality}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>পেশা</b></td>
+                            <td>{{user.userprofile.proffession}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>জন্ম</b></td>
+                            <td>{{user.userprofile.dateOfBirth}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>উচ্চতা</b></td>
+                            <td>{{user.userprofile.height}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>ওজন</b></td>
+                            <td> {{user.userprofile.weight}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>ধর্ম</b></td>
+                            <td>{{user.userprofile.religion}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>লিঙ্গ
+
+                            </b></td>
+                            <td>{{user.userprofile.sex}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>যোগাযোগ
+
+                            </b></td>
+                            <td>{{user.userprofile.phone}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+            
+
+        </div>
+        <div class="w3-padding w3-center w3-white w3-card w3-margin">
+            <div class="w3-block w3-topbar w3-bottombar">
+                <h2 class="w3-xlarge">ছবি</h2>
+            </div>
+            <div class=" galleryImages w3-border">
+                <div class="images">
+                    <img src="{{user.userprofile.galleryPicOne.url}}" class="w3-image l1" />
+                </div>
+                <div class="images">
+                    <img src="{{user.userprofile.galleryPicTwo.url}}" class="w3-image l1" />
+                </div>
+                <div class="images">
+                    <img src="{{user.userprofile.galleryPicThree.url}}" class="w3-image l1" />
+                </div>  
+                <div class="images w3-padding">
+                    <img src="{{user.userprofile.galleryPicFour.url}}" class="w3-image l1" />
+                </div>
+            </div>
+        </div>
+        <div class="w3-padding w3-center w3-white w3-card w3-margin">
+            <div class="w3-block w3-topbar w3-bottombar">
+                <h2 class="w3-xlarge">পোস্ট</h2>
+            </div>
+            <div class="w3-padding ">
+                {% for post in user.post.all %}      
+                <div class="w3-leftbar w3-border-theme w3-left-align w3-padding w3-margin w3-border">
+                    <h6 class="w3-left w3-text-grey w3-small">{{post.creatDate}}</h6>
+                    <br />
+                    <hr>
+                      <p class="w3-text-dark-grey">{{post.details}}</p>
+                    
+                </div>
+                
+                {% endfor %}
+            </div>
+            
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+{% endblock body %}

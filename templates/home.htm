@@ -1,0 +1,112 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+
+{% block title %}
+    নিকাহ 
+{% endblock title %}
+    
+{% block css %}
+
+.body{
+margin-top:50px;
+display:flex;
+}
+.postForm{
+    position:fixed;
+}
+
+.nameAndPhoto{
+    display:flex;
+    justify-content:space-between;
+}
+.photo{
+    width:10%;
+    
+}
+
+@media only screen and (max-width: 600px){
+    .body{
+        flex-direction:column;
+    }
+    .postForm{
+        position:relative;
+    }
+}
+{% endblock css %}
+
+
+{% block body %}
+
+<div class="w3-row body ">
+    <div class="w3-margin w3-padding w3-third w3-round w3-col  ">
+        <div class="postForm w3-card w3-white w3-padding">
+            {% for message in messages %}
+            <div class="w3-panel w3-{{ message.tags }} w3-border w3-display-container ">
+                <span onclick="this.parentElement.style.display='none'"
+                    class="w3-btn w3-large w3-display-topright">&times;</span>
+
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            <form method="POST">{% csrf_token %}
+                <label class="w3-large">
+                    <p><b>আপনি কেমন জীবন সঙ্গী খুঁজছেন?</b></p>
+                </label>
+                {{form}}
+                <button type="submit" class="w3-btn w3-theme w3-right w3-padding w3-margin w3-round">প্রকাশ
+                    করুন</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="w3-margin w3-border w3-twothird w3-col w3-animate-top">
+        {% for p in posts %}
+        <div class="w3-row w3-white w3-card w3-margin">
+            <div class="">
+                <label class=" nameAndPhoto w3-large">
+                    <div class="name">
+                        <p class="w3-margin">
+                            <b>{{p.author.first_name}} {{p.author.last_name}} </b>
+                            <br />
+                            <text class=" w3-text-grey">
+                                <small class="w3-margin-right">{{p.author.userprofile.proffession}}</small>
+                            </text>
+                        </p>
+                    </div>
+                    <div class="w3-margin photo">
+                        <img src="{{p.author.userprofile.profilePicture.url}}" class="w3-image w3-round "
+                            alt="{{p.author.first_name}} {{p.author.last_name}}">
+                    </div>
+                </label>
+
+                <div class=" w3-light-grey w3-padding w3-justify">
+                    <p class="post">
+                        {{p.details|linebreaks}}
+                    </p>
+                </div>
+
+                {% if p.author != request.user %}
+                <a href="/interest/{{p.id}}">
+                    <button type="submit" class="w3-btn w3-theme w3-right w3-padding w3-margin w3-round">আমি
+                    আগ্রহী</button>
+                </a>
+                
+                {% endif %}
+
+
+            </div>
+        </div>
+        {% endfor %}
+        <hr />
+
+
+
+    </div>
+
+
+
+</div>
+
+{% endblock body %}

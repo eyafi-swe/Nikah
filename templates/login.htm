@@ -1,0 +1,78 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+
+{% block title %}
+নিকাহ
+{% endblock title %}
+
+
+{% block css %}
+
+
+.bgimg {
+background-position: center;
+background-size: cover;
+background-image: url("{% static 'images/2.jpg' %}");
+min-height: 100vh;
+}
+
+.login{
+    padding-top:15px;
+}
+a{
+    text-decoration:none;
+}
+{% endblock css %}
+
+
+
+{% block body %}
+
+<section class="w3-light-grey">
+
+
+    <div class="bgimg">
+        <div class="w3-row w3-auto">
+            <div class="w3-col l4 w3-margin w3-border w3-border-theme w3-white w3-padding-16 w3-card-4">
+                {% for message in messages %}
+                <div class="w3-panel w3-{{ message.tags }} w3-border w3-display-container ">
+                    <span onclick="this.parentElement.style.display='none'"
+                        class="w3-btn w3-large w3-display-topright">&times;</span>
+
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+                <div>
+                    <h5 class="w3-text-theme w3-xlarge login w3-center">প্রোফাইল লগইন</h5>
+                </div>
+                <form action="login" method="POST">{% csrf_token %}
+
+                    <div class="w3-padding w3-margin">
+                        <label class="w3-large">ইউজার নেইম</label>
+                        <input type="text" class="w3-input w3-border" name="loginUsername">
+                    </div>
+
+                    <div class="w3-margin w3-padding">
+                        <label class="w3-large">পাসওয়ার্ড</label>
+                        <input type="password" class="w3-input w3-border" name="loginPassword"><br />
+                    </div>
+                    <div class="w3-center">
+                        <button type="submit" class="w3-btn w3-large w3-theme-d2 w3-margin">প্রবেশ</button>
+                    </div>
+
+
+                </form>
+                <div class="w3-container">
+                    <p class="w3-center">অ্যাকাউন্ট নেই?<br>
+                        <a href="/accounts/register" class="w3-text-theme">নতুন অ্যাকাউন্ট খুলুন</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+{% endblock body %}

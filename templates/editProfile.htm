@@ -1,0 +1,38 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+
+{% block title %}
+    প্রোফাইল ইডিট 
+{% endblock title %}
+
+
+{% block css %}
+    .body{
+        margin-top:40px;
+        
+    }
+
+    .form{
+        width:50%;
+        margin:auto;
+        background-color:#e6e6e6;
+        padding:50px;
+        box-shadow:20px 20px 10px grey;
+    }
+{% endblock css %}
+    
+
+{% block body %}
+    <div class="body">
+        
+        <div class="form "><h1>প্রোফাইল ইডিট করুন</h1>
+            <form action="editProfile" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                {{form}}
+                <button type="submit" class="w3-btn  w3-theme-d2 w3-margin ">Send</button>
+            </form>
+        </div>
+        
+    </div>
+{% endblock body %}
+    
